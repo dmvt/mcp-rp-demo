@@ -61,7 +61,7 @@ docker-compose ps
 docker-compose up -d
 ```
 
-Then, start the development server:
+Then, start the development server (runs on port 5500):
 
 ```bash
 npm run dev
@@ -69,6 +69,8 @@ npm run dev
 # Or open in browser automatically
 npm run dev -- --open
 ```
+
+The application will be available at http://localhost:5500
 
 ### Testing
 

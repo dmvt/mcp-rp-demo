@@ -6,7 +6,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
 	server: {
-		port: 5500
+		port: 5500,
+		host: true,
+		allowedHosts: ['mcpdemo.tee.dmvt.io']
 	},
 	test: {
 		workspace: [

@@ -6,7 +6,7 @@ A SvelteKit v5 application that demonstrates integrating with the Model Context 
 
 - **SvelteKit v5** - Modern web framework with server and client rendering capabilities
 - **TypeScript** - Type-safe JavaScript
-- **TailwindCSS** - Utility-first CSS framework
+- **TailwindCSS v4** - Utility-first CSS framework
 - **Supabase** - Open source Firebase alternative for database and authentication
 - **Docker** - For containerizing MCP servers and Supabase
 
@@ -45,19 +45,19 @@ docker-compose up -d
 ```bash
 # Create .env file from example
 cp .env.example .env
-
-# For local development with Docker, use these values in .env:
-# VITE_SUPABASE_URL=http://localhost:8000
-# VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRlbW8iLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYxMzA5ODU0MCwiZXhwIjoxOTI4Njc0NTQwfQ.magsCMsSnNXfoUuBl8XQQrugR-zBXRfXBpEBklJ8-Fs
 ```
+
+The default `.env.example` values should work with the local Docker setup:
+- `VITE_SUPABASE_URL=http://localhost:8000`
+- `VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRlbW8iLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYxMzA5ODU0MCwiZXhwIjoxOTI4Njc0NTQwfQ.magsCMsSnNXfoUuBl8XQQrugR-zBXRfXBpEBklJ8-Fs`
 
 ### Development
 
-First, make sure your PostgreSQL container is running:
+First, make sure your Supabase containers are running:
 
 ```bash
 docker-compose ps
-# If it's not running, start it with:
+# If they're not running, start them with:
 docker-compose up -d
 ```
 
@@ -68,6 +68,28 @@ npm run dev
 
 # Or open in browser automatically
 npm run dev -- --open
+```
+
+### Testing
+
+Run tests with:
+
+```bash
+npm run test
+```
+
+### Linting and Formatting
+
+Check formatting and linting:
+
+```bash
+npm run lint
+```
+
+Format your code:
+
+```bash
+npm run format
 ```
 
 ### Production Build
@@ -88,14 +110,14 @@ npm run preview
 
 ### Tailwind Utilities
 
-To add custom Tailwind utilities, edit `tailwind.config.cjs` in the project root.
+To add custom Tailwind utilities, edit `tailwind.config.js` in the project root.
 
 Example:
 
 ```js
-// tailwind.config.cjs
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
@@ -110,7 +132,7 @@ module.exports = {
 
 ### Supabase Tables
 
-This project uses a PostgreSQL database running in a Docker container as a replacement for Supabase. To add new tables:
+This project uses a PostgreSQL database with Supabase Studio running in Docker containers. To add new tables:
 
 1. Create a new SQL migration file in `supabase/db/init/` directory
 2. Number it sequentially (e.g., `02-new-table.sql`)
